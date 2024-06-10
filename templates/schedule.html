@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala de Trabalho</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="template">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-4">Escala de Trabalho</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {% for employee in schedule %}
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-xl font-bold mb-2">{{ employee.name }}</h2>
+                <p class="text-gray-600">Turno: {{ employee.shift }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
