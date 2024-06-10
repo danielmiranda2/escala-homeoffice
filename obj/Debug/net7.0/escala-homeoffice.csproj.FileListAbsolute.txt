@@ -826,3 +826,8 @@ C:\Meus Projetos\escala-homeoffice\obj\Debug\net7.0\escala-homeoffice.dll
 C:\Meus Projetos\escala-homeoffice\obj\Debug\net7.0\refint\escala-homeoffice.dll
 C:\Meus Projetos\escala-homeoffice\obj\Debug\net7.0\escala-homeoffice.pdb
 C:\Meus Projetos\escala-homeoffice\obj\Debug\net7.0\ref\escala-homeoffice.dll
+C:\Meus Projetos\escala-homeoffice\bin\Debug\net7.0\docs\publish\web.config
+C:\Meus Projetos\escala-homeoffice\bin\Debug\net7.0\docs\escala-homeoffice.staticwebassets.runtime.json
+C:\Meus Projetos\escala-homeoffice\bin\Debug\net7.0\docs\publish\wwwroot\sample-data\weather.json
+C:\Meus Projetos\escala-homeoffice\bin\Debug\net7.0\docs\publish\wwwroot\_framework\blazor.boot.json
+C:\Meus Projetos\escala-homeoffice\bin\Debug\net7.0\docs\wwwroot\_framework\blazor.boot.json
