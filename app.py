@@ -1,24 +1,61 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, session, flash
+from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = 'sua_chave_secreta'
+
+# Dados de exemplo dos usuários
+users = {
+    'admin': 'senha123'
+}
 
 # Dados de exemplo da escala de trabalho
 schedule = [
-    {"name": "João", "shift": "Manhã"},
-    {"name": "Maria", "shift": "Tarde"},
-    {"name": "Pedro", "shift": "Noite"},
-    {"name": "Ana", "shift": "Manhã"},
-    {"name": "Carlos", "shift": "Tarde"},
-    {"name": "Luiza", "shift": "Noite"}
+    {"name": "João", "shift": "Manhã", "date": "2024-06-10"},
+    {"name": "Maria", "shift": "Tarde", "date": "2024-06-11"},
+    {"name": "Pedro", "shift": "Noite", "date": "2024-06-12"},
+    {"name": "Ana", "shift": "Manhã", "date": "2024-06-13"},
+    {"name": "Carlos", "shift": "Tarde", "date": "2024-06-14"},
+    {"name": "Luiza", "shift": "Noite", "date": "2024-06-15"}
 ]
 
-@app.route("/")
+@app.route('/')
 def index():
-    return render_template("index.html")
+    if 'username' in session:
+        return redirect(url_for('schedule'))
+    return redirect(url_for('login'))
 
-@app.route("/schedule")
-def schedule_view():
-    return render_template("schedule.html", schedule=schedule)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username in users and users[username] == password:
+            session['username'] = username
+            return redirect(url_for('schedule'))
+        else:
+            flash('Nome de usuário ou senha inválidos.', 'error')
+    return render_template('login.html')
 
-if __name__ == "__main__":
+@app.route('/schedule', methods=['GET', 'POST'])
+def schedule():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        date = request.form['date']
+        shift = request.form['shift']
+        name = request.form['name']
+
+        # Verifica se a data já está ocupada
+        if any(s['date'] == date for s in schedule):
+            flash('Essa data já está ocupada.', 'error')
+        else:
+            # Atualiza a escala de trabalho
+            schedule.append({"name": name, "shift": shift, "date": date})
+            flash('A escala de trabalho foi atualizada.', 'success')
+
+    return render_template('schedule.html', schedule=schedule)
+
+if __name__ == '__main__':
     app.run(debug=True)
