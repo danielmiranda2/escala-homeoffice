@@ -1,1 +1,0 @@
-C:\Meus Projetos\escala-homeoffice\bin\Realese\net7.0\publish\web.config
